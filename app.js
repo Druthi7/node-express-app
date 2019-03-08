@@ -1,11 +1,22 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 
 const hostname = '0.0.0.0'    // allows access from remote computers
 const port = 3002
 
+app.use(express.static(path.join(__dirname, './druthi')))
+
 app.get('/', function (req, res) {
-  res.send('Welcome home!')
+  res.sendfile(path.join(__dirname, '/conversion.html'))
+})
+
+app.get('/', function (req, res) {
+  res.sendfile(path.join(__dirname, '/script.js'))
+})
+
+app.get('/druthi', (req, res) => {
+  res.sendfile(path.join(__dirname, '/index.html'))
 })
 
 app.get('/hello', (req, res) => {
